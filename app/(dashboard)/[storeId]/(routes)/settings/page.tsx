@@ -24,7 +24,7 @@ const SettingsPage: React.FC<SettingsPageProps> = async ({
 		where: {
 			id: params.storeId,
 			userId,
-		}
+		},
 	});
 
 	if(!store) {

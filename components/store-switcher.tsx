@@ -19,15 +19,11 @@ import {
 
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { cn } from "@/lib/utils";
-
-type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger>;
-
-interface StoreSwitcherProps extends PopoverTriggerProps {
+interface StoreSwitcherProps {
 	items: Store[];
 };
 
 export default function StoreSwitcher({
-	className,
 	items = []
 }: StoreSwitcherProps) {
 	const storeModal = useStoreModal();
@@ -37,7 +33,7 @@ export default function StoreSwitcher({
 	const formattedItems = items.map((item) => ({
 		label: item.name,
 		value: item.id
-	}))
+	}));
 
 	const [open, setOpen] = useState(false);
 
@@ -45,7 +41,8 @@ export default function StoreSwitcher({
 	const onStoreSelect = (store: { value: string, label: string }) => {
 		setOpen(false);
 		router.push(`/${store.value}`)
-	}
+	};
+	
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
@@ -55,7 +52,7 @@ export default function StoreSwitcher({
 					role="combobox"
 					aria-expanded={open}
 					aria-label="Select a store"
-					className={cn("w-[200px] justify-between", className)}
+					className="w-[200px] justify-between"
 				>
 					<StoreIcon className="mr-2 h-4 w-4" />
 					{currentStore?.label}
